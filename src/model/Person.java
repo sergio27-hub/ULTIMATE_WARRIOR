@@ -8,7 +8,7 @@ package model;
  *
  * @author chejo
  */
-public class Persona {
+public class Person {
     private int id_person;
     private int person_type_id;
     private String name;
@@ -17,14 +17,13 @@ public class Persona {
     private String email;
     private String password;
 
-    public Persona(int id_person, int person_type_id, String name, String lastName, String dni, String email, String password) {
+    public Person(int id_person, String email, String password) {
         this.id_person = id_person;
-        this.person_type_id = person_type_id;
-        this.name = name;
-        this.lastName = lastName;
-        this.dni = dni;
         this.email = email;
         this.password = password;
+    }
+    public Person(String username, String password) {
+	this(-1, username, password);
     }
 
     public int getId_person() {
@@ -82,7 +81,10 @@ public class Persona {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+    @Override
+    public String toString() {
+	return "Person [" +"username=" + email + ", password=" + password + "]";
+    }
     
     
 }

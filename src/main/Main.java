@@ -16,9 +16,8 @@ public class Main {
     
         Conexion.conectar();
         
-        new Inicio();
-        
-        System.out.print(" hola ");
+        Inicio inicio = new Inicio();
+        inicio.setVisible(true);      
         
     }
     
