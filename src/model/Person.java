@@ -12,18 +12,45 @@ public class Person {
     private int id_person;
     private int person_type_id;
     private String name;
-    private String lastName;
+    private String lastname;
     private String dni;
     private String email;
     private String password;
+    private String discipline;
+    private String hours;
 
     public Person(int id_person, String email, String password) {
         this.id_person = id_person;
         this.email = email;
         this.password = password;
     }
-    public Person(String username, String password) {
-	this(-1, username, password);
+    
+    public Person(int id_person,String name, String lastname, int person_type_id) {
+        this.id_person = id_person;
+        this.person_type_id = person_type_id;
+        this.name = name;
+        this.lastname = lastname;
+    }
+    
+    public Person(int id_person, String name, String lastname, String email, String password, String dni) { 
+        this.id_person = id_person;
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.dni = dni;
+    }
+    
+    public Person(String email, String password) {
+	this(-1, email, password);
+    }
+    
+    public Person(String name, String lastname, int person_type_id) {
+	this(-1,name, lastname,0);
+    }
+    
+    public Person(String name, String lastname, String email, String password, String dni) {
+	this(-1, name, lastname,email, password, dni);
     }
 
     public int getId_person() {
@@ -51,11 +78,11 @@ public class Person {
     }
 
     public String getLastName() {
-        return lastName;
+        return lastname;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastname = lastName;
     }
 
     public String getDni() {
@@ -83,7 +110,7 @@ public class Person {
     }
     @Override
     public String toString() {
-	return "Person [" +"username=" + email + ", password=" + password + "]";
+	return "Person [" +"email=" + email + ", password=" + password + "]";
     }
     
     

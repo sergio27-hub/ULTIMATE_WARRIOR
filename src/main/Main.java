@@ -4,8 +4,8 @@
  */
 package main;
 
-import DAO.Conexion;
-import view.Inicio;
+import bbdd.Conexion;
+import view.Login;
 
 /**
  *
@@ -14,10 +14,15 @@ import view.Inicio;
 public class Main {
     public static void main(String[] args){
     
+        //InicioAdmin admin = new InicioAdmin();
+        //admin.setVisible(true);
+        
         Conexion.conectar();
         
-        Inicio inicio = new Inicio();
-        inicio.setVisible(true);      
+        Login inicio = new Login();
+        inicio.setVisible(true); 
+        
+        
         
     }
     

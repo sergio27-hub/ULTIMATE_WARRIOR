@@ -1,4 +1,4 @@
-package DAO;
+package bbdd;
 
 import java.sql.*;
 import javax.swing.JOptionPane;

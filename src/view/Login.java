@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package view;
-import controller.PersonController;
+import controller.AdministratorController;
 import java.awt.Image;
 import javax.swing.*;
 
@@ -12,18 +12,18 @@ import javax.swing.*;
  *
  * @author chejo
  */
-public class Inicio extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
 
     /**
      * Creates new form Inicio
      */
     private ImageIcon imagen;    
     private Icon icono;
-    private final PersonController controller = new PersonController();
+    private final AdministratorController controller = new AdministratorController();
     
 
     
-    public Inicio() {
+    public Login() {
         initComponents();
         this.setLocationRelativeTo(this);
         this.PintarImagen(this.Logo1, "src/img/png.png");
@@ -157,16 +157,29 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_inputEmailActionPerformed
 
     private void loginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseClicked
-      
-        if( inputEmail.getText().isBlank() || inputPassword.getText().isBlank() ){ //Blank sirve para validar si tiene espacios y si es vacio
-            System.out.print("No completó los campos");
+        char [] password = inputPassword.getPassword();
+        String pass = new String(password);
+        
+        if( inputEmail.getText().isBlank() ){ //Blank sirve para validar si tiene espacios y si es vacio
+            JOptionPane.showMessageDialog(null, "No se completo el campo email");
+        }
+        if(pass.isBlank()){
+            JOptionPane.showMessageDialog(null, "No se completo el campo password");
         }
         else{
             try{
-                boolean response = controller.login(inputEmail.getText(), inputPassword.getText());
-                System.out.print(response);
+                boolean response = controller.login(inputEmail.getText(), pass);
+                if(response == true){
+                    this.dispose(); // Cerrar el JFrame
+                    InicioAdmin inicioAdmin = new InicioAdmin();
+                    inicioAdmin.setVisible(true); 
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "Este usuario no existe");
+                }
             }catch(Exception e){
                 System.out.print("Error, no se pudo iniciar sesión");
+                System.out.print(e.getMessage());
             }
         }
         
