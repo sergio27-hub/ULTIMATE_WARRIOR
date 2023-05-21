@@ -9,6 +9,7 @@ import java.awt.Image;
 import static java.awt.SystemColor.text;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
@@ -20,8 +21,9 @@ public class InicioAlumn extends javax.swing.JFrame {
     private ImageIcon imagen;
     private Icon icono;
     private final AdministratorController controller = new AdministratorController();
-    private String texto = "\"ENFRENTATE A CADA DESAFIOCON VALENTIA Y DETERMINACIÓN. RECUERDA QUE CADA BATALLA TE ACERCA MÁS A LA VICTORIA." + 
-            "! NO TE RINDAS SIGUE LUCHANDO Y ALCANZARÁS TUS METAS!\"";
+    private String texto = "\"ENFRENTATE A CADA DESAFIOCON VALENTIA Y DETERMINACIÓN. RECUERDA QUE CADA BATALLA TE ACERCA MÁS A LA VICTORIA."
+            + "! NO TE RINDAS SIGUE LUCHANDO Y ALCANZARÁS TUS METAS!\"";
+
     /**
      * Creates new form InicioAlumn
      */
@@ -32,9 +34,10 @@ public class InicioAlumn extends javax.swing.JFrame {
         frase.setText(TextoFrase(texto));
 
     }
-     public String TextoFrase(String texto ){
-         return "<html><p>"+ texto +"</p></html>";
-     }
+
+    public String TextoFrase(String texto) {
+        return "<html><p>" + texto + "</p></html>";
+    }
 
     private void PintarImagen(JLabel ImagenFondo, String ruta) {
         this.imagen = new ImageIcon(ruta);
@@ -55,6 +58,7 @@ public class InicioAlumn extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         frase = new javax.swing.JLabel();
+        buttonComents = new java.awt.Button();
         ImagenFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,6 +84,20 @@ public class InicioAlumn extends javax.swing.JFrame {
         frase.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         frase.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
         jPanel1.add(frase, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 570, 180));
+
+        buttonComents.setFont(new java.awt.Font("Verdana", 3, 18)); // NOI18N
+        buttonComents.setLabel("DEJAR COMENTARIO DE CLASE");
+        buttonComents.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buttonComentsMouseClicked(evt);
+            }
+        });
+        buttonComents.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonComentsActionPerformed(evt);
+            }
+        });
+        jPanel1.add(buttonComents, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 610, 350, 40));
         jPanel1.add(ImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(3, -1, 980, 730));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -96,9 +114,20 @@ public class InicioAlumn extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void buttonComentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonComentsActionPerformed
+
+    }//GEN-LAST:event_buttonComentsActionPerformed
+
+    private void buttonComentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonComentsMouseClicked
+        CommentsStudents commentsview = new CommentsStudents();
+        commentsview.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); //Esto hara que al cerrar el JFrame, se oculte en lufar de terminar la ejecucion del programa
+        commentsview.setVisible(true);
+    }//GEN-LAST:event_buttonComentsMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ImagenFondo;
+    private java.awt.Button buttonComents;
     private javax.swing.JLabel frase;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
