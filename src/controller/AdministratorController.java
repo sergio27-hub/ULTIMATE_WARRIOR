@@ -24,6 +24,15 @@ public class AdministratorController {
         }
     }
 
+    public ArrayList<Person> getAllTrainersForDiscipline() {
+        try {
+            ArrayList<Person> trainers = new AdministratorService().getAllTrainersForDiscipline();
+            return trainers;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
     public ArrayList<Person> getAllTrainers() {
         try {
             ArrayList<Person> trainers = new AdministratorService().getAllTrainers();

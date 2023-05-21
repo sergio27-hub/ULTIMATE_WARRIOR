@@ -6,7 +6,6 @@ package view;
 
 import controller.AdministratorController;
 import javax.swing.JOptionPane;
-import model.Discipline;
 import model.Person;
 
 /**

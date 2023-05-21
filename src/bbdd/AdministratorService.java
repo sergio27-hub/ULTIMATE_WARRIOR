@@ -35,6 +35,25 @@ public class AdministratorService {
         ArrayList<Person> trainers = new ArrayList<Person>();
 
         ResultSet results = Conexion.ejecutarSentencia(
+                "SELECT * FROM " + personTable
+                + " WHERE PERSON_TYPE_ID ='2';"); // El 2 referencia a Trainer
+
+        while (results.next()) {
+            String name = results.getString(3);
+            String lastname = results.getString(4);
+            String dni = results.getString(5);
+            String email = results.getString(6);
+            String password = results.getString(7);
+            trainers.add(new Person(name, lastname,email,password,dni));
+        }
+
+        return trainers;
+    }
+    
+    public ArrayList<Person> getAllTrainersForDiscipline() throws SQLException { 
+        ArrayList<Person> trainers = new ArrayList<Person>();
+
+        ResultSet results = Conexion.ejecutarSentencia(
                 "SELECT NAME , LASTNAME FROM " + personTable
                 + " WHERE PERSON_TYPE_ID ='2';"); // El 2 referencia a Trainer
 
@@ -122,7 +141,7 @@ public class AdministratorService {
         String name = user.getName();
         int personatype = 2;
 
-        String query = "INSERT INTO " + personTable + "(persona_type_id,name,lastname,dni,email,password)" + " VALUES ('" + personatype + "','" + name + "','" + lastname + "','" + dni + "','" + email + "', '" + password + "')";
+        String query = "INSERT INTO " + personTable + "(person_type_id,name,lastname,dni,email,password)" + " VALUES (" + personatype + ",'" + name + "','" + lastname + "','" + dni + "','" + email + "', '" + password + "')";
         Conexion.ejecutarUpdate(query);
     }
 
@@ -134,7 +153,7 @@ public class AdministratorService {
         String name = user.getName();
         int personatype = 3;
 
-        String query = "INSERT INTO " + personTable + "(persona_type_id,name,lastname,dni,email,password)" + " VALUES ('" + personatype + "','" + name + "','" + lastname + "','" + dni + "','" + email + "', '" + password + "')";
+        String query = "INSERT INTO " + personTable + "(person_type_id,name,lastname,dni,email,password)" + " VALUES ('" + personatype + "','" + name + "','" + lastname + "','" + dni + "','" + email + "', '" + password + "')";
 
         Conexion.ejecutarUpdate(query);
     }

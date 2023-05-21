@@ -7,7 +7,6 @@ package view;
 import controller.AdministratorController;
 import javax.swing.JOptionPane;
 import model.Discipline;
-import model.Person;
 
 /**
  *
@@ -97,11 +96,8 @@ public class AddDiscipline extends javax.swing.JFrame {
     private void buttonAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buttonAddMouseClicked
         String name =  inputName.getText();
         String description =  inputDescription.getText();
-        if(name.isBlank() ){ //Blank sirve para validar si tiene espacios y si es vacio
-            JOptionPane.showMessageDialog(null, "No se completo el campo nombre");
-        }
-        if(description.isBlank()){
-            JOptionPane.showMessageDialog(null, "No se completo el campo descripción");
+        if(name.isBlank() && description.isBlank()){ //Blank sirve para validar si tiene espacios y si es vacio
+            JOptionPane.showMessageDialog(null, "No se completó todos los campos");
         }
         else{
             try{

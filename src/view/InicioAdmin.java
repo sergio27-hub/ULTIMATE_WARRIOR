@@ -4,7 +4,6 @@
  */
 package view;
 
-import controller.AdministratorController;
 import java.awt.Image;
 import javax.swing.*;
 import javax.swing.ImageIcon;
