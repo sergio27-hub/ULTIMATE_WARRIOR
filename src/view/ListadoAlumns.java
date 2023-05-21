@@ -8,6 +8,7 @@ import controller.AdministratorController;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
 import model.Person;
@@ -26,9 +27,9 @@ public class ListadoAlumns extends javax.swing.JFrame {
      */
     public ListadoAlumns() {
         initComponents();
-        if (!controller.isEmpty()|| controller != null) { //isEmpty() en lugar de size() para verificar si el controlador está vacío. Si el controlador no está vacío, se llama al método loadStudents() para cargar los estudiantes en la tabla. De lo contrario, no se realiza ninguna acción
+        //if (!controller.isEmpty()|| controller != null) { //isEmpty() en lugar de size() para verificar si el controlador está vacío. Si el controlador no está vacío, se llama al método loadStudents() para cargar los estudiantes en la tabla. De lo contrario, no se realiza ninguna acción
             loadStudents();
-        }
+        //}
         addWindowListener(new WindowAdapter() { // Es parte del ciclo de vida del JPanel o JFrame, el cual indica que cada vez que está activado realiza lo que esta dentro del metodo.
             @Override //Sobreescribir
             public void windowActivated(WindowEvent e) {
@@ -97,6 +98,11 @@ public class ListadoAlumns extends javax.swing.JFrame {
                 AddAlumnMouseClicked(evt);
             }
         });
+        AddAlumn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddAlumnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -140,6 +146,10 @@ public class ListadoAlumns extends javax.swing.JFrame {
         addAlumn.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); //Esto hara que al cerrar el JFrame, se oculte en lufar de terminar la ejecucion del programa
         addAlumn.setVisible(true);
     }//GEN-LAST:event_AddAlumnMouseClicked
+
+    private void AddAlumnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddAlumnActionPerformed
+        
+    }//GEN-LAST:event_AddAlumnActionPerformed
 
     /**
      * @param args the command line arguments

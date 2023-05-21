@@ -4,7 +4,11 @@
  */
 package view;
 
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 /**
  *
@@ -12,11 +16,27 @@ import javax.swing.JFrame;
  */
 public class InicioTrainer extends javax.swing.JFrame {
 
+    private ImageIcon imagen;
+    private Icon icono;
+
     /**
      * Creates new form InicioTrainer
      */
     public InicioTrainer() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        this.PintarImagen(this.Panel1, "src/img/fondo.jpg");
+    }
+
+    private void PintarImagen(JLabel Panel1, String ruta) {
+        this.imagen = new ImageIcon(ruta);
+        this.icono = new ImageIcon(this.imagen.getImage().getScaledInstance(
+                Panel1.getWidth(),
+                Panel1.getHeight(),
+                Image.SCALE_DEFAULT)
+        );
+        Panel1.setIcon(this.icono);
+        this.repaint();
     }
 
     /**
@@ -32,13 +52,22 @@ public class InicioTrainer extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         buttonStudentsTrainer = new java.awt.Button();
         ButtonReadComments = new java.awt.Button();
+        Panel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Semilight", 3, 36)); // NOI18N
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Wide Latin", 3, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 204, 51));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("HELLO TRAINER !");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 580, 116));
 
+        buttonStudentsTrainer.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Yellow"));
+        buttonStudentsTrainer.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 2, 36)); // NOI18N
+        buttonStudentsTrainer.setForeground(new java.awt.Color(255, 0, 0));
         buttonStudentsTrainer.setLabel("Students");
         buttonStudentsTrainer.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -50,8 +79,12 @@ public class InicioTrainer extends javax.swing.JFrame {
                 buttonStudentsTrainerActionPerformed(evt);
             }
         });
+        jPanel1.add(buttonStudentsTrainer, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 216, 89));
 
+        ButtonReadComments.setBackground(new java.awt.Color(255, 153, 0));
         ButtonReadComments.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        ButtonReadComments.setFont(new java.awt.Font("Tw Cen MT Condensed Extra Bold", 3, 24)); // NOI18N
+        ButtonReadComments.setForeground(new java.awt.Color(255, 0, 0));
         ButtonReadComments.setLabel("COMMENTS STUDENTS");
         ButtonReadComments.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -63,45 +96,10 @@ public class InicioTrainer extends javax.swing.JFrame {
                 ButtonReadCommentsActionPerformed(evt);
             }
         });
+        jPanel1.add(ButtonReadComments, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 380, 250, 104));
+        jPanel1.add(Panel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-4, 0, 680, 646));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(196, 196, 196)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(buttonStudentsTrainer, javax.swing.GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)
-                            .addComponent(ButtonReadComments, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(204, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64)
-                .addComponent(buttonStudentsTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
-                .addComponent(ButtonReadComments, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(143, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -132,6 +130,7 @@ public class InicioTrainer extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button ButtonReadComments;
+    private javax.swing.JLabel Panel1;
     private java.awt.Button buttonStudentsTrainer;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
