@@ -20,15 +20,17 @@ public class AdministratorService {
     String disciplineTable = "Disciplines";
     String personDisciplineTable = "person_discipline";
 
-    public boolean login(String email, String password) throws SQLException {
+    public int login(String email, String password) throws SQLException {
 
         ResultSet results = Conexion.ejecutarSentencia("SELECT * FROM " + personTable + " WHERE email = '" + email + "' AND password = '" + password + "'");
 
         while (results.next()) {
-            return true;
+            
+            String personType = results.getString(2);
+            return Integer.parseInt(personType);
         }
 
-        return false;
+        return 0;
     }
 
     public ArrayList<Person> getAllStudents() throws SQLException {

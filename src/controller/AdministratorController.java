@@ -16,12 +16,12 @@ import model.Person;
 public class AdministratorController {
 
     private AdministratorService service = new AdministratorService();
-    public boolean login(String email, String password) {
+    public int login(String email, String password) {
         try {
-            boolean loginRequest = service.login(email, password);	//Request es pregunta, Response es respuesta
-            return loginRequest;
+            int personType = service.login(email, password);	
+            return personType;
         } catch (Exception e) {
-            return false;
+            return 0;
         }
     }
 
