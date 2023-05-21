@@ -33,7 +33,7 @@ public class AddTrainerToDiscipline extends javax.swing.JFrame {
     private void loadTrainers() {
         ArrayList<Person> trainers = controller.getAllTrainersForDiscipline();
         for (Person trainer : trainers) {
-            modelTrainers.addElement(trainer.getName() + " " + trainer.getLastName());
+            modelTrainers.addElement(trainer.getName() + " " + trainer.getLastname());
         }
         comboBoxTrainer.setModel(modelTrainers);
     }

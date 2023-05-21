@@ -4,17 +4,56 @@
  */
 package view;
 
+import controller.AdministratorController;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
+import model.Person;
+
 /**
  *
  * @author chejo
  */
 public class ListadoAlumns extends javax.swing.JFrame {
 
+    private final AdministratorController controller = new AdministratorController();
+    private DefaultTableModel model; // Sirve para insertar datos en la tabla
+
     /**
      * Creates new form ListadoAlumns
      */
     public ListadoAlumns() {
         initComponents();
+        loadStudents();
+        addWindowListener(new WindowAdapter() { // Es parte del ciclo de vida del JPanel o JFrame, el cual indica que cada vez que está activado realiza lo que esta dentro del metodo.
+            @Override //Sobreescribir
+            public void windowActivated(WindowEvent e) {
+                loadStudents();
+            }
+        });
+    }
+
+    private void loadStudents() {
+        ArrayList<Person> trainers = controller.getStudents();
+        model = new DefaultTableModel();
+        model.addColumn("Nombre");
+        model.addColumn("Apellido");
+        model.addColumn("DNI");
+        model.addColumn("Email");
+        model.addColumn("Contraseña");
+        model.addColumn("Disciplina");
+        model.addColumn("Horario");
+
+        // model.setColumnEditable(1,false);
+        // model.setColumnEditable(2,false);
+        for (Person trainer : trainers) {
+            Object[] rowData = {trainer.getName(), trainer.getLastname(), trainer.getDni(), 
+                trainer.getEmail(), trainer.getPassword(),trainer.getDiscipline(), trainer.getHours()};
+            model.addRow(rowData);
+        }
+        table.setModel(model);
     }
 
     /**
@@ -28,12 +67,12 @@ public class ListadoAlumns extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         AddAlumn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -44,13 +83,18 @@ public class ListadoAlumns extends javax.swing.JFrame {
                 "Name", "LastName", "Discipline", "DNI"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(table);
 
         AddAlumn.setBackground(new java.awt.Color(153, 153, 153));
         AddAlumn.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
         AddAlumn.setForeground(javax.swing.UIManager.getDefaults().getColor("Actions.Red"));
         AddAlumn.setText("Agregar Alumno");
         AddAlumn.setBorder(javax.swing.BorderFactory.createLineBorder(javax.swing.UIManager.getDefaults().getColor("Actions.Yellow")));
+        AddAlumn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AddAlumnMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,15 +133,20 @@ public class ListadoAlumns extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void AddAlumnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddAlumnMouseClicked
+        AddAlumn addAlumn = new AddAlumn();
+        addAlumn.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); //Esto hara que al cerrar el JFrame, se oculte en lufar de terminar la ejecucion del programa
+        addAlumn.setVisible(true);
+    }//GEN-LAST:event_AddAlumnMouseClicked
+
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddAlumn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 }

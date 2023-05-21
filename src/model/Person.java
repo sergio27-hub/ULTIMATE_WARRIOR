@@ -16,7 +16,10 @@ public class Person {
     private String dni;
     private String email;
     private String password;
+    private int discipline_id;
     private String discipline;
+    private int trainer_id;
+    private String trainer;
     private String hours;
 
     public Person(int id_person, String email, String password) {
@@ -41,6 +44,54 @@ public class Person {
         this.dni = dni;
     }
     
+    public Person(int id_person, String name, String lastname, String dni, String email, String password, String discipline, String trainer, String hours) { 
+        this.id_person = id_person;
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.dni = dni;
+        this.discipline = discipline;
+        this.trainer = trainer;
+        this.hours = hours;
+    }
+    
+    public Person(int id_person, String name, String lastname, String email, String password, String dni, int discipline_id, int trainer_id, String hours) { 
+        this.id_person = id_person;
+        this.name = name;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.dni = dni;
+        this.discipline_id = discipline_id;
+        this.trainer_id = trainer_id;
+        this.hours = hours;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public int getDiscipline_id() {
+        return discipline_id;
+    }
+
+    public void setDiscipline_id(int discipline_id) {
+        this.discipline_id = discipline_id;
+    }
+
+    public int getTrainer_id() {
+        return trainer_id;
+    }
+
+    public void setTrainer_id(int trainer_id) {
+        this.trainer_id = trainer_id;
+    }
+    
     public Person(String email, String password) {
 	this(-1, email, password);
     }
@@ -51,6 +102,14 @@ public class Person {
     
     public Person(String name, String lastname, String email, String password, String dni) {
 	this(-1, name, lastname,email, password, dni);
+    }
+    
+    public Person(String name, String lastname, String dni, String email, String password, String discipline, String trainer, String hours) {
+	this(-1, name, lastname, dni, email, password, discipline, trainer, hours);
+    }
+    
+    public Person(String name, String lastname, String email, String password, String dni, int discipline_id, int trainer_id, String hours) {
+	this(-1, name, lastname,email, password, dni, discipline_id, trainer_id, hours);
     }
 
     public int getId_person() {
@@ -77,14 +136,6 @@ public class Person {
         this.name = name;
     }
 
-    public String getLastName() {
-        return lastname;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastname = lastName;
-    }
-
     public String getDni() {
         return dni;
     }
@@ -108,9 +159,36 @@ public class Person {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getHours() {
+        return hours;
+    }
+
+    public void setHours(String hours) {
+        this.hours = hours;
+    }
+
+    public String getDiscipline() {
+        return discipline;
+    }
+
+    public void setDiscipline(String discipline) {
+        this.discipline = discipline;
+    }
+
+    public String getTrainer() {
+        return trainer;
+    }
+
+    public void setTrainer(String trainer) {
+        this.trainer = trainer;
+    }
+    
+    
+    
     @Override
     public String toString() {
-	return "Person [" +"email=" + email + ", password=" + password + "]";
+	return "Person [" +"id="+ id_person + "email=" + email + ", password=" + password + "]";
     }
     
     

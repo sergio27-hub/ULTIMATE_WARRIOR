@@ -4,17 +4,67 @@
  */
 package view;
 
+import controller.AdministratorController;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
+import model.Discipline;
+import model.Person;
+
 /**
  *
  * @author chejo
  */
 public class AddAlumn extends javax.swing.JFrame {
 
+    
+    private final AdministratorController controller = new AdministratorController();
+    
+    private DefaultComboBoxModel modelTrainers = new DefaultComboBoxModel<>();
+    private DefaultComboBoxModel modelDisciplines = new DefaultComboBoxModel<>();
+    private DefaultComboBoxModel modelHours = new DefaultComboBoxModel<>();
     /**
      * Creates new form AddAlumn
      */
     public AddAlumn() {
         initComponents();
+        loadTrainers();
+        loadDisciplines();
+        loadHours();
+    }
+    
+    private void loadTrainers() {
+        ArrayList<Person> trainers = controller.getAllTrainersForDiscipline();
+        for (Person trainer : trainers) {
+            modelTrainers.addElement(trainer.getName() + " " + trainer.getLastname());
+        }
+        comboBoxTrainer.setModel(modelTrainers);
+    }
+
+    private void loadDisciplines() {
+        ArrayList<Discipline> disciplines = controller.getAllDisciplines();
+        for (Discipline discipline : disciplines) {
+            modelDisciplines.addElement(discipline.getName());
+        }
+        comboBoxDiscipline.setModel(modelDisciplines);
+    }
+    
+    private void loadHours() {
+        modelHours.addElement("8:00 - 9:00");
+        modelHours.addElement("9:00 - 10:00");
+        modelHours.addElement("10:00 - 11:00");
+        modelHours.addElement("11:00 - 13:00");
+        modelHours.addElement("12:00 - 13:00");
+        modelHours.addElement("13:00 - 14:00");
+        modelHours.addElement("14:00 - 15:00");
+        modelHours.addElement("15:00 - 16:00");
+        modelHours.addElement("16:00 - 17:00");
+        modelHours.addElement("17:00 - 18:00");
+        modelHours.addElement("18:00 - 19:00");
+        modelHours.addElement("19:00 - 20:00");
+        modelHours.addElement("20:00 - 19:00");
+        modelHours.addElement("21:00 - 22:00");
+        comboBoxHours.setModel(modelHours);
     }
 
     /**
@@ -32,8 +82,8 @@ public class AddAlumn extends javax.swing.JFrame {
         InputDniAlumn = new javax.swing.JTextField();
         InputEmailAlumn = new javax.swing.JTextField();
         InputPasswordAlumn = new javax.swing.JTextField();
-        DisciplinesBox = new javax.swing.JComboBox<>();
-        TrainersBox = new javax.swing.JComboBox<>();
+        comboBoxDiscipline = new javax.swing.JComboBox<>();
+        comboBoxTrainer = new javax.swing.JComboBox<>();
         AddAlumn = new java.awt.Button();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -42,6 +92,8 @@ public class AddAlumn extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        Horas = new javax.swing.JLabel();
+        comboBoxHours = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,12 +103,17 @@ public class AddAlumn extends javax.swing.JFrame {
             }
         });
 
-        DisciplinesBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxDiscipline.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        TrainersBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboBoxTrainer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         AddAlumn.setFont(new java.awt.Font("Verdana", 3, 18)); // NOI18N
         AddAlumn.setLabel("Agregar");
+        AddAlumn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AddAlumnMouseClicked(evt);
+            }
+        });
         AddAlumn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddAlumnActionPerformed(evt);
@@ -71,17 +128,25 @@ public class AddAlumn extends javax.swing.JFrame {
 
         jLabel4.setText("EMAIL :");
 
-        jLabel5.setText("PASSWORD");
+        jLabel5.setText("CONTRASEÑA");
 
-        jLabel6.setText("DISCIPLINAS");
+        jLabel6.setText("DISCIPLINA");
 
-        jLabel7.setText("PROFESORES");
+        jLabel7.setText("PROFESOR");
+
+        Horas.setText("Horas");
+
+        comboBoxHours.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(167, 167, 167)
+                .addComponent(AddAlumn, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(176, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -91,7 +156,8 @@ public class AddAlumn extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(Horas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(InputNameAlumn)
@@ -99,13 +165,10 @@ public class AddAlumn extends javax.swing.JFrame {
                     .addComponent(InputDniAlumn)
                     .addComponent(InputEmailAlumn)
                     .addComponent(InputPasswordAlumn)
-                    .addComponent(DisciplinesBox, 0, 236, Short.MAX_VALUE)
-                    .addComponent(TrainersBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(comboBoxDiscipline, 0, 236, Short.MAX_VALUE)
+                    .addComponent(comboBoxTrainer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboBoxHours, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(75, 75, 75))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(167, 167, 167)
-                .addComponent(AddAlumn, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(176, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,13 +195,21 @@ public class AddAlumn extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(36, 36, 36)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(DisciplinesBox, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxDiscipline, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TrainersBox, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxTrainer, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Horas)
+                        .addGap(44, 44, 44))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(comboBoxHours, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)))
                 .addComponent(AddAlumn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
         );
@@ -152,8 +223,8 @@ public class AddAlumn extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -167,20 +238,50 @@ public class AddAlumn extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_AddAlumnActionPerformed
 
+    private void AddAlumnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddAlumnMouseClicked
+        String name = InputNameAlumn.getText();
+        String lastname = InputLastNameAlumn.getText();
+        String dni = InputDniAlumn.getText();
+        String email = InputEmailAlumn.getText();
+        String password = InputPasswordAlumn.getText();                                 
+        int trainer_id = comboBoxTrainer.getSelectedIndex() + 1;
+        int discipline_id = comboBoxDiscipline.getSelectedIndex() + 1;
+        String hours = (String) comboBoxHours.getSelectedItem();
+
+        if (name.isBlank() && lastname.isBlank() && email.isBlank() && password.isBlank() && dni.isBlank()) { //Blank sirve para validar si tiene espacios y si es vacio
+            JOptionPane.showMessageDialog(null, "No se completó todos los campos");
+        } else {
+            try {
+                Person student = new Person(-1, name, lastname, email, password, dni, discipline_id, trainer_id, hours);
+                boolean response = controller.createStudent(student);
+                if (response == true) {
+                    this.dispose(); // Cerrar el JFrame
+                    JOptionPane.showMessageDialog(null, "El alumno fue creado correctamente");
+                } else {
+                    JOptionPane.showMessageDialog(null, "El alumno no pudo crearse");
+                }
+            } catch (Exception e) {
+                System.out.print("Error, no se pudo crear el profesor");
+                System.out.print(e.getMessage());
+            }
+        }
+    }//GEN-LAST:event_AddAlumnMouseClicked
+
     /**
      * @param args the command line arguments
      */
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button AddAlumn;
-    private javax.swing.JComboBox<String> DisciplinesBox;
+    private javax.swing.JLabel Horas;
     private javax.swing.JTextField InputDniAlumn;
     private javax.swing.JTextField InputEmailAlumn;
     private javax.swing.JTextField InputLastNameAlumn;
     private javax.swing.JTextField InputNameAlumn;
     private javax.swing.JTextField InputPasswordAlumn;
-    private javax.swing.JComboBox<String> TrainersBox;
+    private javax.swing.JComboBox<String> comboBoxDiscipline;
+    private javax.swing.JComboBox<String> comboBoxHours;
+    private javax.swing.JComboBox<String> comboBoxTrainer;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

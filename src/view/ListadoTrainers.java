@@ -41,13 +41,13 @@ public class ListadoTrainers extends javax.swing.JFrame {
         model.addColumn("Nombre");
         model.addColumn("Apellido");
         model.addColumn("DNI");
-        model.addColumn("Contraseña");
         model.addColumn("Email");
+        model.addColumn("Contraseña");
         
         // model.setColumnEditable(1,false);
         // model.setColumnEditable(2,false);
         for (Person trainer : trainers) {
-            Object[] rowData = {trainer.getName(), trainer.getLastName(), trainer.getDni(), trainer.getPassword(), trainer.getEmail()};
+            Object[] rowData = {trainer.getName(), trainer.getLastname(), trainer.getDni(), trainer.getEmail(), trainer.getPassword()};
             model.addRow(rowData);
         }
         table.setModel(model);
@@ -143,7 +143,7 @@ public class ListadoTrainers extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddTrainerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AddTrainerMouseClicked
-       AddTrainer addTrainer = new AddTrainer();
+        AddTrainer addTrainer = new AddTrainer();
         addTrainer.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE); //Esto hara que al cerrar el JFrame, se oculte en lufar de terminar la ejecucion del programa
         addTrainer.setVisible(true);
     }//GEN-LAST:event_AddTrainerMouseClicked

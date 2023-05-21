@@ -15,9 +15,10 @@ import model.Person;
  */
 public class AdministratorController {
 
+    private AdministratorService service = new AdministratorService();
     public boolean login(String email, String password) {
         try {
-            boolean loginRequest = new AdministratorService().login(email, password);	//Request es pregunta, Response es respuesta
+            boolean loginRequest = service.login(email, password);	//Request es pregunta, Response es respuesta
             return loginRequest;
         } catch (Exception e) {
             return false;
@@ -26,7 +27,7 @@ public class AdministratorController {
 
     public ArrayList<Person> getAllTrainersForDiscipline() {
         try {
-            ArrayList<Person> trainers = new AdministratorService().getAllTrainersForDiscipline();
+            ArrayList<Person> trainers = service.getAllTrainersForDiscipline();
             return trainers;
         } catch (Exception e) {
             return null;
@@ -35,8 +36,17 @@ public class AdministratorController {
     
     public ArrayList<Person> getAllTrainers() {
         try {
-            ArrayList<Person> trainers = new AdministratorService().getAllTrainers();
+            ArrayList<Person> trainers =  service.getAllTrainers();
             return trainers;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public ArrayList<Person> getAllStudents() {
+        try {
+            ArrayList<Person> students =  service.getAllStudents();
+            return students;
         } catch (Exception e) {
             return null;
         }
@@ -44,7 +54,7 @@ public class AdministratorController {
     
     public ArrayList<Discipline> getAllDisciplines() {
         try {
-            ArrayList<Discipline> disciplines = new AdministratorService().getAllDisciplines();
+            ArrayList<Discipline> disciplines = service.getAllDisciplines();
             return disciplines;
         } catch (Exception e) {
             return null;
@@ -53,7 +63,7 @@ public class AdministratorController {
 
     public ArrayList<Person> getTrainers() {
         try {
-            ArrayList<Person> trainers = new AdministratorService().getTrainers();
+            ArrayList<Person> trainers = service.getTrainers();
             return trainers;
         } catch (Exception e) {
             return null;
@@ -62,7 +72,7 @@ public class AdministratorController {
 
     public ArrayList<Person> getStudents() {
         try {
-            ArrayList<Person> students = new AdministratorService().getStudents();
+            ArrayList<Person> students = service.getStudents();
             return students;
         } catch (Exception e) {
             return null;
@@ -71,7 +81,7 @@ public class AdministratorController {
 
     public ArrayList<Discipline> getDisciplines() {
         try {
-            ArrayList<Discipline> disciplines = new AdministratorService().getDisciplines();
+            ArrayList<Discipline> disciplines = service.getDisciplines();
             return disciplines;
         } catch (Exception e) {
             return null;
@@ -80,7 +90,7 @@ public class AdministratorController {
 
     public boolean createTrainer(Person person) {
         try {
-            new AdministratorService().createTrainer(person);
+            service.createTrainer(person);
             return true;
         } catch (Exception e) {
             return false;
@@ -89,7 +99,8 @@ public class AdministratorController {
 
     public boolean createStudent(Person person) {
         try {
-            new AdministratorService().createStudent(person);
+            int student_id = service.getCountPersons() + 1;
+            service.createStudent(person, student_id);
             return true;
         } catch (Exception e) {
             return false;
@@ -98,7 +109,7 @@ public class AdministratorController {
 
     public boolean createDiscipline(Discipline discipline) {
         try {
-            new AdministratorService().createDiscipline(discipline);
+            service.createDiscipline(discipline);
             return true;
         } catch (Exception e) {
             return false;
@@ -107,7 +118,7 @@ public class AdministratorController {
 
     public boolean addTrainerToDiscipline(int discipline_id, int trainer_id) {
         try {
-            new AdministratorService().addTrainerToDiscipline(discipline_id, trainer_id);
+            service.addTrainerToDiscipline(discipline_id, trainer_id);
             return true;
         } catch (Exception e) {
             return false;
