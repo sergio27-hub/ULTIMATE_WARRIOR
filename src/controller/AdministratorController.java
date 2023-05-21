@@ -5,6 +5,7 @@
 package controller;
 
 import bbdd.AdministratorService;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Discipline;
 import model.Person;
@@ -15,12 +16,13 @@ import model.Person;
  */
 public class AdministratorController {
 
-    private AdministratorService service = new AdministratorService();
+    private final AdministratorService service = new AdministratorService();
+
     public int login(String email, String password) {
         try {
-            int personType = service.login(email, password);	
+            int personType = service.login(email, password);
             return personType;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return 0;
         }
     }
@@ -29,34 +31,34 @@ public class AdministratorController {
         try {
             ArrayList<Person> trainers = service.getAllTrainersForDiscipline();
             return trainers;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return null;
         }
     }
-    
+
     public ArrayList<Person> getAllTrainers() {
         try {
-            ArrayList<Person> trainers =  service.getAllTrainers();
+            ArrayList<Person> trainers = service.getAllTrainers();
             return trainers;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return null;
         }
     }
-    
+
     public ArrayList<Person> getAllStudents() {
         try {
-            ArrayList<Person> students =  service.getAllStudents();
+            ArrayList<Person> students = service.getAllStudents();
             return students;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return null;
         }
     }
-    
+
     public ArrayList<Discipline> getAllDisciplines() {
         try {
             ArrayList<Discipline> disciplines = service.getAllDisciplines();
             return disciplines;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return null;
         }
     }
@@ -65,7 +67,7 @@ public class AdministratorController {
         try {
             ArrayList<Person> trainers = service.getTrainers();
             return trainers;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return null;
         }
     }
@@ -74,7 +76,7 @@ public class AdministratorController {
         try {
             ArrayList<Person> students = service.getStudents();
             return students;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return null;
         }
     }
@@ -83,7 +85,7 @@ public class AdministratorController {
         try {
             ArrayList<Discipline> disciplines = service.getDisciplines();
             return disciplines;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return null;
         }
     }
@@ -102,7 +104,7 @@ public class AdministratorController {
             int student_id = service.getCountPersons() + 1;
             service.createStudent(person, student_id);
             return true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             return false;
         }
     }
@@ -123,6 +125,12 @@ public class AdministratorController {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public boolean isEmpty() {
+        ArrayList<Person> trainers = getTrainers();
+        ArrayList<Person> students = getStudents();
+        return (trainers == null || trainers.isEmpty()) && (students == null || students.isEmpty());
     }
 
 }

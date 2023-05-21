@@ -26,7 +26,9 @@ public class ListadoAlumns extends javax.swing.JFrame {
      */
     public ListadoAlumns() {
         initComponents();
-        loadStudents();
+        if (!controller.isEmpty()|| controller != null) { //isEmpty() en lugar de size() para verificar si el controlador está vacío. Si el controlador no está vacío, se llama al método loadStudents() para cargar los estudiantes en la tabla. De lo contrario, no se realiza ninguna acción
+            loadStudents();
+        }
         addWindowListener(new WindowAdapter() { // Es parte del ciclo de vida del JPanel o JFrame, el cual indica que cada vez que está activado realiza lo que esta dentro del metodo.
             @Override //Sobreescribir
             public void windowActivated(WindowEvent e) {
@@ -49,8 +51,8 @@ public class ListadoAlumns extends javax.swing.JFrame {
         // model.setColumnEditable(1,false);
         // model.setColumnEditable(2,false);
         for (Person trainer : trainers) {
-            Object[] rowData = {trainer.getName(), trainer.getLastname(), trainer.getDni(), 
-                trainer.getEmail(), trainer.getPassword(),trainer.getDiscipline(), trainer.getHours()};
+            Object[] rowData = {trainer.getName(), trainer.getLastname(), trainer.getDni(),
+                trainer.getEmail(), trainer.getPassword(), trainer.getDiscipline(), trainer.getHours()};
             model.addRow(rowData);
         }
         table.setModel(model);

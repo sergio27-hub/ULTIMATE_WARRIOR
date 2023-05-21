@@ -261,7 +261,7 @@ public class AddAlumn extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "El alumno no pudo crearse");
                 }
             } catch (Exception e) {
-                System.out.print("Error, no se pudo crear el profesor");
+                System.out.print("Error, no se pudo crear el Alumno");
                 System.out.print(e.getMessage());
             }
         }

@@ -202,7 +202,8 @@ public class AdministratorService {
 
         return students;
     }
-
+    
+    
     public ArrayList<Discipline> getDisciplines() throws SQLException {
         ArrayList<Discipline> disciplines = new ArrayList<Discipline>();
 
